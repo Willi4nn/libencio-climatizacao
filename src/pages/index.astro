@@ -1,16 +1,41 @@
 ---
+import FAQ from '../components/FAQ';
+import Header from '../components/Header';
+import {
+Atendimento,
+Avaliacoes,
+ComoFunciona,
+FloatingWhatsApp,
+Footer,
+Galeria,
+Hero,
+PreFooterCTA,
+QuemAtende,
+Servicos
+} from '../components/Sections';
+import WhatsAppForm from '../components/WhatsAppForm';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Libêncio Refrigeração e Climatização | Patos de Minas"
+  description="Conserto de geladeira, freezer, cervejeira e ar-condicionado a domicílio em Patos de Minas - MG. Segunda a sábado, das 8h às 18h."
+>
+  <Header client:load />
+
+  <main>
+    <Hero client:load />
+    <Servicos />
+    <QuemAtende />
+    <Atendimento />
+    <Galeria />
+    <Avaliacoes />
+    <ComoFunciona />
+    <WhatsAppForm client:load />
+    <FAQ client:load />
+    <PreFooterCTA />
+  </main>
+
+  <Footer />
+  <FloatingWhatsApp />
+</Layout>
