@@ -2,15 +2,15 @@
 import { MessageCircle, Shield, User } from 'lucide-react';
 import React, { useState, type FormEvent } from 'react';
 
-export default function WhatsAppForm() {
-  const [formData, setFormData] = useState({
-    nome: '',
-    tipoAtendimento: 'Residencial',
-    equipamento: '',
-    servico: '',
-    descricao: '',
-    bairro: '',
-    quando: 'O mais rápido possível (Urgência)',
+export default function ContactForm() {
+  const [formState, setFormState] = useState({
+    name: '',
+    serviceType: 'Residencial',
+    equipment: '',
+    service: '',
+    description: '',
+    neighborhood: '',
+    preferredTime: 'O mais rápido possível (Urgência)',
   });
 
   const handleInputChange = (
@@ -19,37 +19,38 @@ export default function WhatsAppForm() {
     >
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormState((previousState) => ({ ...previousState, [name]: value }));
   };
 
   const handleWhatsAppSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const msg = `*NOVA SOLICITAÇÃO DE ATENDIMENTO*\n\n*Nome:* ${formData.nome}\n*Tipo:* ${formData.tipoAtendimento}\n*Equipamento:* ${formData.equipamento}\n*Serviço desejado:* ${formData.servico}\n*Bairro:* ${formData.bairro || 'Não informado'}\n*Previsão:* ${formData.quando}\n\n*Descrição do problema:*\n${formData.descricao}`;
-    const url = `https://wa.me/5534991565849?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
+    const message = `*NOVA SOLICITAÇÃO DE ATENDIMENTO*\n\n*Nome:* ${formState.name}\n*Tipo:* ${formState.serviceType}\n*Equipamento:* ${formState.equipment}\n*Serviço desejado:* ${formState.service}\n*Bairro:* ${formState.neighborhood || 'Não informado'}\n*Previsão:* ${formState.preferredTime}\n\n*Descrição do problema:*\n${formState.description}`;
+    const whatsappUrl = `https://wa.me/5534991565849?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
-    <section id="form" className="py-20 bg-[#0B1E36] relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#0A1629] skew-x-12 origin-top-right hidden lg:block opacity-50"></div>
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16">
-          <div className="lg:w-2/5 text-white flex flex-col justify-center">
-            <p className="text-[#00B4D8] font-bold tracking-widest text-xs mb-3 uppercase">
-              Ordem de Serviço (OS)
-            </p>
+    <section
+      id="form"
+      className="relative overflow-hidden bg-[#071a33] py-20 lg:py-28"
+    >
+      <div className="absolute right-0 top-0 hidden h-full w-1/2 bg-[#0b2444] opacity-60 lg:block [clip-path:polygon(24%_0,100%_0,100%_100%,0_100%)]"></div>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+          <div className="flex flex-col justify-center text-white lg:w-2/5">
+            <p className="eyebrow mb-4 text-[#18c5e8]">Ordem de Serviço (OS)</p>
 
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h2 className="mb-6 text-4xl font-black leading-[1.05] tracking-tight lg:text-5xl">
               Abra sua OS a domicílio.
             </h2>
 
-            <p className="text-slate-400 text-lg mb-12">
+            <p className="mb-10 text-lg leading-relaxed text-slate-400">
               Vamos organizar as informações para facilitar seu contato{' '}
               <span className="text-white font-semibold">pelo WhatsApp.</span>
             </p>
             <div className="space-y-8">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/5">
                   <User className="w-5 h-5 text-[#00B4D8]" />
                 </div>
                 <div>
@@ -62,7 +63,7 @@ export default function WhatsAppForm() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/5">
                   <MessageCircle className="w-5 h-5 text-[#00B4D8]" />
                 </div>
                 <div>
@@ -75,7 +76,7 @@ export default function WhatsAppForm() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/5">
                   <Shield className="w-5 h-5 text-[#00B4D8]" />
                 </div>
                 <div>
@@ -91,7 +92,7 @@ export default function WhatsAppForm() {
           </div>
 
           <div className="lg:w-3/5">
-            <div className="bg-white rounded-2xl p-6 md:p-10 shadow-2xl">
+            <div className="rounded-3xl border border-white/10 bg-white p-6 shadow-2xl md:p-10">
               <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -100,12 +101,12 @@ export default function WhatsAppForm() {
                     </label>
                     <input
                       type="text"
-                      name="nome"
+                      name="name"
                       required
-                      value={formData.nome}
+                      value={formState.name}
                       onChange={handleInputChange}
                       placeholder="Ex.: João Silva"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 outline-none transition-all focus:border-[#0876e8] focus:bg-white focus:ring-4 focus:ring-blue-100"
                     />
                   </div>
                   <div>
@@ -117,9 +118,9 @@ export default function WhatsAppForm() {
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
                           type="radio"
-                          name="tipoAtendimento"
+                          name="serviceType"
                           value="Residencial"
-                          checked={formData.tipoAtendimento === 'Residencial'}
+                          checked={formState.serviceType === 'Residencial'}
                           onChange={handleInputChange}
                           className="w-4 h-4 text-[#0066CC] focus:ring-[#0066CC]"
                         />
@@ -130,9 +131,9 @@ export default function WhatsAppForm() {
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
                           type="radio"
-                          name="tipoAtendimento"
+                          name="serviceType"
                           value="Empresarial"
-                          checked={formData.tipoAtendimento === 'Empresarial'}
+                          checked={formState.serviceType === 'Empresarial'}
                           onChange={handleInputChange}
                           className="w-4 h-4 text-[#0066CC] focus:ring-[#0066CC]"
                         />
@@ -150,11 +151,11 @@ export default function WhatsAppForm() {
                       Equipamento <span className="text-red-500">*</span>
                     </label>
                     <select
-                      name="equipamento"
+                      name="equipment"
                       required
-                      value={formData.equipamento}
+                      value={formState.equipment}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white appearance-none"
+                      className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 outline-none transition-all focus:border-[#0876e8] focus:bg-white focus:ring-4 focus:ring-blue-100"
                     >
                       <option value="">Selecione o equipamento</option>
                       <option value="Ar-Condicionado">Ar-Condicionado</option>
@@ -179,9 +180,9 @@ export default function WhatsAppForm() {
                       <span className="text-red-500">*</span>
                     </label>
                     <select
-                      name="servico"
+                      name="service"
                       required
-                      value={formData.servico}
+                      value={formState.service}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white appearance-none"
                     >
@@ -209,10 +210,10 @@ export default function WhatsAppForm() {
                     <span className="text-red-500">*</span>
                   </label>
                   <textarea
-                    name="descricao"
+                    name="description"
                     required
                     rows={3}
-                    value={formData.descricao}
+                    value={formState.description}
                     onChange={handleInputChange}
                     placeholder="Ex.: Minha geladeira Frost Free parou de gelar na parte de baixo..."
                     className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white resize-none"
@@ -229,8 +230,8 @@ export default function WhatsAppForm() {
                     </label>
                     <input
                       type="text"
-                      name="bairro"
-                      value={formData.bairro}
+                      name="neighborhood"
+                      value={formState.neighborhood}
                       onChange={handleInputChange}
                       placeholder="Ex.: Centro"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white"
@@ -241,8 +242,8 @@ export default function WhatsAppForm() {
                       Quando prefere o atendimento?
                     </label>
                     <select
-                      name="quando"
-                      value={formData.quando}
+                      name="preferredTime"
+                      value={formState.preferredTime}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-[#0066CC] focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-700 bg-slate-50 focus:bg-white appearance-none"
                     >
@@ -260,7 +261,7 @@ export default function WhatsAppForm() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#0066CC] hover:bg-blue-700 text-white font-bold py-4 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2 mt-4"
+                  className="button-primary mt-4 w-full rounded-xl py-4"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Mandar a OS no WhatsApp

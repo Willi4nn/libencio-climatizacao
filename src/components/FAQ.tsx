@@ -9,69 +9,73 @@ export default function FAQ() {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  const faqs = [
+  const faqItems = [
     {
-      q: 'Quais equipamentos são atendidos?',
-      a: 'Atendemos ar-condicionado (todas as capacidades), geladeiras, freezers, cervejeiras, expositores refrigerados e bebedouros industriais.',
+      question: 'Quais equipamentos são atendidos?',
+      answer: 'Atendemos ar-condicionado (todas as capacidades), geladeiras, freezers, cervejeiras, expositores refrigerados e bebedouros industriais.',
     },
     {
-      q: 'Vocês atendem residências e empresas?',
-      a: 'Sim! Temos soluções tanto para o conforto da sua casa quanto para manter o funcionamento da sua empresa ou comércio.',
+      question: 'Vocês atendem residências e empresas?',
+      answer: 'Sim! Temos soluções tanto para o conforto da sua casa quanto para manter o funcionamento da sua empresa ou comércio.',
     },
     {
-      q: 'O atendimento é realizado a domicílio?',
-      a: 'Sim, realizamos o diagnóstico e o conserto no local (na sua casa ou empresa) para sua maior comodidade.',
+      question: 'O atendimento é realizado a domicílio?',
+      answer: 'Sim, realizamos o diagnóstico e o conserto no local (na sua casa ou empresa) para sua maior comodidade.',
     },
     {
-      q: 'Como solicitar um orçamento?',
-      a: 'Basta preencher o formulário nesta página ou nos chamar diretamente no WhatsApp descrevendo o problema.',
+      question: 'Como solicitar um orçamento?',
+      answer: 'Basta preencher o formulário nesta página ou nos chamar diretamente no WhatsApp descrevendo o problema.',
     },
     {
-      q: 'Quanto custa o serviço?',
-      a: 'Os valores variam de acordo com o equipamento e o defeito. Mediante visita técnica, passamos o orçamento exato antes de qualquer execução.',
+      question: 'Quanto custa o serviço?',
+      answer: 'Os valores variam de acordo com o equipamento e o defeito. Mediante visita técnica, passamos o orçamento exato antes de qualquer execução.',
     },
     {
-      q: 'Vocês atendem em cidades vizinhas?',
-      a: 'Nosso foco principal é Patos de Minas, mas atendemos a região sob consulta de taxa de deslocamento.',
+      question: 'Vocês atendem em cidades vizinhas?',
+      answer: 'Nosso foco principal é Patos de Minas, mas atendemos a região sob consulta de taxa de deslocamento.',
     },
   ];
 
   return (
-    <section id="faq" className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
-          <div className="lg:w-1/3">
-            <h2 className="text-3xl font-bold text-[#0B1E36] mb-4">
+    <section
+      id="faq"
+      className="border-t border-slate-200 bg-slate-50 py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="flex flex-col items-start gap-12 lg:flex-row">
+          <div className="lg:sticky lg:top-32 lg:w-1/3">
+            <p className="eyebrow mb-4">Dúvidas comuns</p>
+            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#071a33] sm:text-4xl">
               Perguntas frequentes
             </h2>
-            <p className="text-slate-600">
+            <p className="max-w-sm text-base leading-relaxed text-slate-600">
               Tire suas dúvidas antes de entrar em contato. Se ainda precisar de
               ajuda, é só enviar sua solicitação.
             </p>
           </div>
 
-          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-            {faqs.map((faq, idx) => (
+          <div className="grid w-full grid-cols-1 gap-3 lg:w-2/3">
+            {faqItems.map((faq, index) => (
               <div
-                key={idx}
-                className="bg-white border border-slate-200 rounded-lg overflow-hidden h-fit"
+                key={index}
+                className="h-fit overflow-hidden rounded-2xl border border-slate-200 bg-white transition-shadow hover:shadow-md"
               >
                 <button
-                  onClick={() => toggleFaq(idx)}
-                  className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
+                  onClick={() => toggleFaq(index)}
+                  className="flex w-full items-center justify-between px-5 py-5 text-left focus:outline-none"
                 >
-                  <span className="font-semibold text-[#0B1E36] text-sm pr-4">
-                    {faq.q}
+                  <span className="pr-4 text-sm font-bold text-[#071a33] sm:text-base">
+                    {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${openFaqIndex === idx ? 'rotate-180' : ''}`}
+                    className={`h-5 w-5 shrink-0 text-[#0876e8] transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180' : ''}`}
                   />
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaqIndex === idx ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaqIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                  <div className="px-5 pb-4 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-3">
-                    {faq.a}
+                  <div className="border-t border-slate-100 px-5 pb-5 pt-4 text-sm leading-relaxed text-slate-600">
+                    {faq.answer}
                   </div>
                 </div>
               </div>

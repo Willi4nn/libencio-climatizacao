@@ -1,12 +1,89 @@
 @import "tailwindcss";
 
 @layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-    scroll-behavior: smooth;
+  :root {
+    --ink: #071a33;
+    --ink-soft: #163252;
+    --brand: #0876e8;
+    --brand-dark: #0758b5;
+    --cyan: #18c5e8;
+    --surface: #f5f8fc;
+    --line: #e5edf5;
   }
+
+  html {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
   body {
-    background-color: #ffffff;
-    color: #1e293b;
+    background: var(--surface);
+    color: #334155;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #bceffc;
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(24, 197, 232, 0.6);
+    outline-offset: 3px;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  section {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  .section-shell {
+    width: min(100% - 2rem, 76rem);
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    color: var(--brand);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .surface-card {
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(7, 26, 51, 0.07);
+  }
+
+  .button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 0.75rem;
+    background: var(--brand);
+    color: white;
+    font-weight: 750;
+    box-shadow: 0 10px 24px rgba(8, 118, 232, 0.24);
+    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  }
+
+  .button-primary:hover {
+    background: var(--brand-dark);
+    box-shadow: 0 14px 28px rgba(8, 118, 232, 0.3);
+    transform: translateY(-2px);
   }
 }

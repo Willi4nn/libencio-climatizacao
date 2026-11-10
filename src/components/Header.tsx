@@ -1,119 +1,102 @@
 'use client';
-import { Menu, Snowflake, X } from 'lucide-react';
+import { ArrowUpRight, Menu, Snowflake, X } from 'lucide-react';
 import { useState } from 'react';
+
+const links = [
+  ['Serviços', '#servicos'],
+  ['Atendimento', '#atendimento'],
+  ['Galeria', '#galeria'],
+  ['Dúvidas', '#faq'],
+];
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
-          <div className="text-[#0066CC]">
-            <Snowflake className="w-8 h-8 md:w-10 md:h-10" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-black text-2xl md:text-3xl text-[#0B1E36] tracking-tight leading-none">
-              LIBÊNCIO
-            </span>
-            <span className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-[#0066CC] uppercase leading-tight">
-              Refrigeração e Climatização
-            </span>
-          </div>
-        </a>
-
-        <nav className="hidden lg:flex items-center gap-8">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-white/80 bg-white/90 shadow-[0_12px_35px_rgba(7,26,51,0.08)] backdrop-blur-xl">
+        <div className="flex h-17 items-center justify-between px-4 sm:px-6">
           <a
             href="#"
-            className="text-sm font-semibold text-[#0066CC] border-b-2 border-[#0066CC] pb-1"
+            className="flex items-center gap-2.5"
+            aria-label="Libêncio - início"
           >
-            Início
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8f7ff] text-[#0876e8]">
+              <Snowflake className="h-6 w-6" strokeWidth={2.5} />
+            </span>
+            <span className="flex flex-col">
+              <span className="font-black text-xl tracking-[-0.04em] text-[#071a33] leading-none sm:text-2xl">
+                LIBÊNCIO
+              </span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-[#0876e8] leading-tight sm:text-[9px]">
+                Refrigeração e Climatização
+              </span>
+            </span>
           </a>
-          <a
-            href="#servicos"
-            className="text-sm font-medium text-slate-600 hover:text-[#0066CC] transition-colors"
-          >
-            Serviços
-          </a>
-          <a
-            href="#atendimento"
-            className="text-sm font-medium text-slate-600 hover:text-[#0066CC] transition-colors"
-          >
-            Atendimento
-          </a>
-          <a
-            href="#galeria"
-            className="text-sm font-medium text-slate-600 hover:text-[#0066CC] transition-colors"
-          >
-            Galeria
-          </a>
-          <a
-            href="#faq"
-            className="text-sm font-medium text-slate-600 hover:text-[#0066CC] transition-colors"
-          >
-            Perguntas Frequentes
-          </a>
-          <a
-            href="#form"
-            className="bg-[#0066CC] text-white px-6 py-2.5 rounded-md font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
-          >
-            Solicitar atendimento
-          </a>
-        </nav>
 
-        <button
-          className="lg:hidden text-[#0B1E36]"
-          onClick={toggleMenu}
-          aria-label="Menu"
+          <nav
+            className="hidden items-center gap-7 lg:flex"
+            aria-label="Navegação principal"
+          >
+            <a href="#" className="text-sm font-bold text-[#0876e8]">
+              Início
+            </a>
+            {links.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="text-sm font-semibold text-slate-500 transition-colors hover:text-[#0876e8]"
+              >
+                {label}
+              </a>
+            ))}
+            <a href="#form" className="button-primary px-5 py-2.5 text-sm">
+              Solicitar atendimento <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </nav>
+
+          <button
+            className="rounded-xl p-2 text-[#071a33] transition-colors hover:bg-slate-100 lg:hidden"
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
+
+        <div
+          className={`overflow-hidden border-t border-slate-100 bg-white transition-all duration-300 ease-in-out lg:hidden ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
         >
-          {isMobileMenuOpen ? (
-            <X className="w-8 h-8" />
-          ) : (
-            <Menu className="w-8 h-8" />
-          )}
-        </button>
-      </div>
-
-      <div
-        className={`lg:hidden bg-white border-b border-gray-100 overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-      >
-        <div className="flex flex-col px-4 py-6 gap-4">
-          <a
-            href="#servicos"
-            onClick={toggleMenu}
-            className="font-medium text-lg text-slate-700"
+          <nav
+            className="flex flex-col gap-1 px-5 py-4"
+            aria-label="Navegação mobile"
           >
-            Serviços
-          </a>
-          <a
-            href="#atendimento"
-            onClick={toggleMenu}
-            className="font-medium text-lg text-slate-700"
-          >
-            Atendimento
-          </a>
-          <a
-            href="#galeria"
-            onClick={toggleMenu}
-            className="font-medium text-lg text-slate-700"
-          >
-            Galeria
-          </a>
-          <a
-            href="#faq"
-            onClick={toggleMenu}
-            className="font-medium text-lg text-slate-700"
-          >
-            Perguntas Frequentes
-          </a>
-          <a
-            href="#form"
-            onClick={toggleMenu}
-            className="bg-[#0066CC] text-white px-6 py-3 rounded-md font-semibold text-center mt-2"
-          >
-            Solicitar atendimento
-          </a>
+            {links.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={closeMenu}
+                className="rounded-lg px-3 py-2.5 font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              href="#form"
+              onClick={closeMenu}
+              className="button-primary mt-2 px-6 py-3 text-center"
+            >
+              Solicitar atendimento <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </nav>
         </div>
       </div>
     </header>

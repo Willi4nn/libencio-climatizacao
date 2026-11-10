@@ -2,18 +2,18 @@
 import FAQ from '../components/FAQ';
 import Header from '../components/Header';
 import {
-Atendimento,
-Avaliacoes,
-ComoFunciona,
+ServiceTypes,
+Reviews,
+HowItWorks,
 FloatingWhatsApp,
 Footer,
-Galeria,
+Gallery,
 Hero,
-PreFooterCTA,
-QuemAtende,
-Servicos
+PreFooterCallToAction,
+TechnicianProfile,
+Services
 } from '../components/Sections';
-import WhatsAppForm from '../components/WhatsAppForm';
+import ContactForm from '../components/WhatsAppForm';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -25,15 +25,15 @@ import Layout from '../layouts/Layout.astro';
 
   <main>
     <Hero client:load />
-    <Servicos />
-    <QuemAtende />
-    <Atendimento />
-    <Galeria />
-    <Avaliacoes />
-    <ComoFunciona />
-    <WhatsAppForm client:load />
+    <Services />
+    <TechnicianProfile />
+    <ServiceTypes />
+    <Gallery />
+    <Reviews client:load/>
+    <HowItWorks />
+    <ContactForm client:load />
     <FAQ client:load />
-    <PreFooterCTA />
+    <PreFooterCallToAction />
   </main>
 
   <Footer />
