@@ -12,35 +12,59 @@ export default function FAQ() {
   const faqItems = [
     {
       question: 'Quais equipamentos são atendidos?',
-      answer: 'Atendemos ar-condicionado (todas as capacidades), geladeiras, freezers, cervejeiras, expositores refrigerados e bebedouros industriais.',
+      answer:
+        'Atendemos ar-condicionado (todas as capacidades), geladeiras, freezers, cervejeiras, expositores refrigerados e bebedouros industriais.',
     },
     {
       question: 'Vocês atendem residências e empresas?',
-      answer: 'Sim! Temos soluções tanto para o conforto da sua casa quanto para manter o funcionamento da sua empresa ou comércio.',
+      answer:
+        'Sim! Temos soluções tanto para o conforto da sua casa quanto para manter o funcionamento da sua empresa ou comércio.',
     },
     {
       question: 'O atendimento é realizado a domicílio?',
-      answer: 'Sim, realizamos o diagnóstico e o conserto no local (na sua casa ou empresa) para sua maior comodidade.',
+      answer:
+        'Sim, realizamos o diagnóstico e o conserto no local (na sua casa ou empresa) para sua maior comodidade.',
     },
     {
       question: 'Como solicitar um orçamento?',
-      answer: 'Basta preencher o formulário nesta página ou nos chamar diretamente no WhatsApp descrevendo o problema.',
+      answer:
+        'Basta preencher o formulário nesta página ou nos chamar diretamente no WhatsApp descrevendo o problema.',
     },
     {
       question: 'Quanto custa o serviço?',
-      answer: 'Os valores variam de acordo com o equipamento e o defeito. Mediante visita técnica, passamos o orçamento exato antes de qualquer execução.',
+      answer:
+        'Os valores variam de acordo com o equipamento e o defeito. Mediante visita técnica, passamos o orçamento exato antes de qualquer execução.',
     },
     {
       question: 'Vocês atendem em cidades vizinhas?',
-      answer: 'Nosso foco principal é Patos de Minas, mas atendemos a região sob consulta de taxa de deslocamento.',
+      answer:
+        'Nosso foco principal é Patos de Minas, mas atendemos a região sob consulta de taxa de deslocamento.',
     },
   ];
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
 
   return (
     <section
       id="faq"
       className="border-t border-slate-200 bg-slate-50 py-20 lg:py-28"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col items-start gap-12 lg:flex-row">
           <div className="lg:sticky lg:top-32 lg:w-1/3">
@@ -63,6 +87,7 @@ export default function FAQ() {
                 <button
                   onClick={() => toggleFaq(index)}
                   className="flex w-full items-center justify-between px-5 py-5 text-left focus:outline-none"
+                  aria-expanded={openFaqIndex === index}
                 >
                   <span className="pr-4 text-sm font-bold text-[#071a33] sm:text-base">
                     {faq.question}

@@ -3,31 +3,77 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
-  description: string;
+  description?: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description = "Especialista em instalação e limpeza de ar-condicionado, conserto de geladeiras, troca de compressor e bebedouros industriais em Patos de Minas, MG.",
+  image = "/images/hero-bg.jpg"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "name": "Libêncio Climatização & Refrigeração",
+  "image": new URL(image, Astro.site).toString(),
+  "@id": "https://libencio-climatizacao.vercel.app",
+  "url": "https://libencio-climatizacao.vercel.app",
+  "telephone": "+5534991565849",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Patos de Minas",
+    "addressLocality": "Patos de Minas",
+    "addressRegion": "MG",
+    "postalCode": "38700-000",
+    "addressCountry": "BR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -18.5788,
+    "longitude": -36.4526
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  }
+};
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="canonical" href={canonicalURL} />
 
     <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta name="keywords" content="ar condicionado patos de minas, conserto de geladeira frost free, técnico de refrigeração, cervejeira, limpeza ar condicionado" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
-  <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+  <body>
     <slot />
   </body>
 </html>

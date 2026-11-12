@@ -82,28 +82,40 @@ export function Hero() {
   useEffect(() => {
     setIsHeroLoaded(true);
     const timer = setInterval(() => {
-      setActiveSlideIndex((previousIndex) => (previousIndex + 1) % heroSlides.length);
+      setActiveSlideIndex(
+        (previousIndex) => (previousIndex + 1) % heroSlides.length
+      );
     }, 6000);
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 
   const goToNextSlide = (e: React.MouseEvent) => {
     e.preventDefault();
-    setActiveSlideIndex((previousIndex) => (previousIndex + 1) % heroSlides.length);
+    setActiveSlideIndex(
+      (previousIndex) => (previousIndex + 1) % heroSlides.length
+    );
   };
 
   const goToPreviousSlide = (e: React.MouseEvent) => {
     e.preventDefault();
     setActiveSlideIndex(
-      (previousIndex) => (previousIndex - 1 + heroSlides.length) % heroSlides.length
+      (previousIndex) =>
+        (previousIndex - 1 + heroSlides.length) % heroSlides.length
     );
   };
 
   return (
     <section className="relative flex min-h-svh lg:min-h-168 items-center overflow-hidden bg-(--ink) pt-36 pb-12 lg:pt-40 lg:pb-20 text-white selection:bg-(--cyan) selection:text-(--ink)">
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-full overflow-hidden opacity-30 lg:w-[60%] lg:opacity-100">
-        <div className="absolute inset-0 z-10 bg-linear-to-r from-(--ink) via-(--ink)/60 to-transparent"></div>
-        <div className="absolute inset-0 z-10 bg-linear-to-t from-(--ink)/80 via-transparent to-(--ink)/30 lg:hidden"></div>
+      <h1 className="sr-only">
+        Instalação de Ar-condicionado e Conserto de Geladeiras em Patos de Minas
+        - MG
+      </h1>
+
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-full overflow-hidden lg:w-[60%]">
+        <div className="absolute inset-0 z-10 bg-black/40 lg:bg-transparent"></div>
+
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-(--ink)/90 via-(--ink)/60 to-transparent lg:bg-gradient-to-r lg:from-(--ink) lg:via-(--ink)/60 lg:to-transparent"></div>
+
         {heroSlides.map((slide, index) => (
           <div
             key={index}
@@ -115,7 +127,8 @@ export function Hero() {
           >
             <img
               src={slide.image}
-              alt="Serviços Libêncio"
+              alt={`Serviço de climatização e refrigeração em Patos de Minas - Slide ${index + 1}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
               className="w-full h-full object-cover object-center"
             />
           </div>
@@ -142,12 +155,12 @@ export function Hero() {
           </div>
 
           <div className="mb-9 flex min-h-56 flex-col justify-center lg:min-h-60">
-            <h1 className="mb-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-300 sm:text-5xl lg:text-[3.5rem]">
+            <h2 className="mb-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-300 sm:text-5xl lg:text-[3.5rem]">
               {heroSlides[activeSlideIndex].titlePrefix}{' '}
               <span className="text-(--cyan)">
                 {heroSlides[activeSlideIndex].highlightedTitle}
               </span>
-            </h1>
+            </h2>
             <p className="max-w-xl text-base sm:text-lg leading-relaxed text-slate-300 transition-all duration-300">
               {heroSlides[activeSlideIndex].description}
             </p>
@@ -229,7 +242,7 @@ export function Services() {
         <div className="reveal-on-scroll mb-12 max-w-2xl">
           <p className="eyebrow mb-3">Nossas soluções</p>
           <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-(--ink) sm:text-4xl">
-            Do que esquenta ao que tem que gelar
+            Serviços de Climatização e Refrigeração
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-slate-500">
             Oferecemos soluções completas separadas por vias especializadas para
@@ -246,7 +259,8 @@ export function Services() {
               <div className="h-48 relative overflow-hidden bg-slate-100">
                 <img
                   src="https://plus.unsplash.com/premium_photo-1682126009570-3fe2399162f7?q=80&w=1170&auto=format&fit=crop"
-                  alt="Ar-condicionado"
+                  alt="Instalação e manutenção de Ar-condicionado em Patos de Minas"
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -294,7 +308,8 @@ export function Services() {
               <div className="h-48 relative overflow-hidden bg-slate-100">
                 <img
                   src="/images/servico-geladeira.jpg"
-                  alt="Geladeira e Refrigeração"
+                  alt="Conserto de Geladeiras Frost Free e Refrigeração Comercial"
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -375,7 +390,8 @@ export function TechnicianProfile() {
               <div className="w-36 h-36 md:w-44 md:h-44 rounded-full p-2 bg-white border border-(--line) shadow-sm relative z-10 mx-auto md:mx-0">
                 <img
                   src="/images/hero-bg.jpg"
-                  alt="Libêncio Pereira"
+                  alt="Libêncio Pereira - Técnico em Refrigeração em Patos de Minas"
+                  loading="lazy"
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -413,13 +429,21 @@ export function TechnicianProfile() {
 
           <div className="lg:w-1/2 grid grid-cols-2 gap-4 sm:gap-6 self-center w-full">
             {[
-              { icon: Clock, title: 'Horário', description: 'Seg a Sáb, 8h às 18h' },
+              {
+                icon: Clock,
+                title: 'Horário',
+                description: 'Seg a Sáb, 8h às 18h',
+              },
               {
                 icon: ShieldCheck,
                 title: 'Pagamento',
                 description: 'Débito, crédito e PIX',
               },
-              { icon: MapPin, title: 'Cidade', description: 'Patos de Minas, MG' },
+              {
+                icon: MapPin,
+                title: 'Cidade',
+                description: 'Patos de Minas, MG',
+              },
               {
                 icon: Check,
                 title: 'Modalidade',
@@ -466,7 +490,7 @@ export function ServiceTypes() {
           <div className="lg:w-1/3 reveal-on-scroll">
             <span className="eyebrow mb-3 block">Estrutura Completa</span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-(--ink) mb-5 tracking-tight leading-[1.15]">
-              Atendimento residencial e empresarial
+              Atendimento residencial e comercial em Patos de Minas
             </h2>
             <p className="text-slate-600 leading-relaxed text-base mb-6">
               Seja o conforto da sua casa ou a exigência do seu comércio, conte
@@ -583,7 +607,7 @@ export function Gallery() {
         <div className="text-center mb-16 max-w-2xl mx-auto reveal-on-scroll">
           <p className="eyebrow mb-3">Portfólio Real</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-(--ink) mb-4 tracking-tight">
-            Do jeito que ficou na casa do cliente
+            Instalações realizadas em Patos de Minas
           </h2>
           <p className="text-slate-600 text-base leading-relaxed">
             Fotos reais de serviços executados em Patos de Minas. Arraste para
@@ -599,7 +623,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm hover:shadow-lg transition-shadow duration-300">
               <img
                 src="/images/galeria/split-varanda.jpg"
-                alt="Split na varanda"
+                alt="Instalação de ar-condicionado Split em varanda em Patos de Minas"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/95 via-(--ink)/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -625,7 +650,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/condensadora-samsung.jpg"
-                alt="Condensadora instalada"
+                alt="Instalação de unidade externa condensadora de ar-condicionado"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -647,7 +673,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/split-alpendre.jpg"
-                alt="Split no alpendre"
+                alt="Instalação de ar-condicionado em alpendre residencial em Patos de Minas"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -669,7 +696,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/instalacao-comercial.jpg"
-                alt="Sala comercial"
+                alt="Projeto de climatização para sala comercial e escritórios"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-(--ink)/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -694,7 +722,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/condensadora-parede.jpg"
-                alt="Suporte na parede externa"
+                alt="Instalação segura de condensadora em suporte de parede externa"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -716,7 +745,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/infra-tubulacao.jpg"
-                alt="Infraestrutura"
+                alt="Infraestrutura embutida com tubulação de cobre para ar-condicionado"
+                loading="lazy"
                 className="w-full h-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-(--ink)/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -741,7 +771,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/condensadora-corredor.jpg"
-                alt="Corredor lateral"
+                alt="Instalação de condensadora de ar-condicionado em corredor lateral"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -763,7 +794,8 @@ export function Gallery() {
             <div className="surface-card group relative overflow-hidden p-0 border-none rounded-2xl h-full shadow-sm">
               <img
                 src="/images/galeria/condensadoras-laje.jpg"
-                alt="Várias unidades na laje"
+                alt="Bateria de condensadoras instaladas em laje técnica comercial em Patos de Minas"
+                loading="lazy"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-(--ink)/90 via-(--ink)/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -861,33 +893,27 @@ export function Reviews() {
   const reviews = [
     {
       name: 'Nicole Moreira',
-      text:
-        'Tive uma ótima experiência com o serviço. O atendimento foi excelente, pontual, educado e explicou tudo com clareza. Recomendo!',
+      text: 'Tive uma ótima experiência com o serviço. O atendimento foi excelente, pontual, educado e explicou tudo com clareza. Recomendo!',
     },
     {
       name: 'Marco Aurélio',
-      text:
-        'Excelente profissional! A instalação do ar-condicionado ficou perfeita, rápida e muito bem feita. Capricho em cada detalhe.',
+      text: 'Excelente profissional! A instalação do ar-condicionado ficou perfeita, rápida e muito bem feita. Capricho em cada detalhe.',
     },
     {
       name: 'Maria de Fátima',
-      text:
-        'Libêncio foi pontual, atencioso e muito profissional. Instalou o ar-condicionado com capricho, deixou tudo limpo e explicou o funcionamento.',
+      text: 'Libêncio foi pontual, atencioso e muito profissional. Instalou o ar-condicionado com capricho, deixou tudo limpo e explicou o funcionamento.',
     },
     {
       name: 'Willian Lima',
-      text:
-        'Ótimo profissional, competente e justo! Com uma vasta experiência na área de refrigeração!',
+      text: 'Ótimo profissional, competente e justo! Com uma vasta experiência na área de refrigeração!',
     },
     {
       name: 'Daiane Soares',
-      text:
-        'O técnico chegou no horário, foi educado e explicou o que estava acontecendo com o aparelho. Deixou tudo funcionando corretamente.',
+      text: 'O técnico chegou no horário, foi educado e explicou o que estava acontecendo com o aparelho. Deixou tudo funcionando corretamente.',
     },
     {
       name: 'Piaba',
-      text:
-        'Minha geladeira parou de gelar e o Libêncio resolveu no mesmo dia! Atendimento rápido e saiu funcionando perfeitamente.',
+      text: 'Minha geladeira parou de gelar e o Libêncio resolveu no mesmo dia! Atendimento rápido e saiu funcionando perfeitamente.',
     },
   ];
 
@@ -963,7 +989,7 @@ export function Reviews() {
                     ))}
                   </div>
                   <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
-                    &ldquo;{review.text}&rdquo;
+                    “{review.text}”
                   </p>
                 </div>
                 <div className="flex items-center gap-3 pt-5 border-t border-(--line) mt-auto">
@@ -972,9 +998,7 @@ export function Reviews() {
                   </div>
                   <span className="font-semibold text-(--ink) text-sm flex items-center gap-1.5 whitespace-nowrap overflow-hidden text-ellipsis">
                     {review.name}
-                    <span className="text-slate-400 font-normal">
-                      &mdash; Google
-                    </span>
+                    <span className="text-slate-400 font-normal">— Google</span>
                   </span>
                 </div>
               </div>
@@ -1092,7 +1116,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-slate-500">
             <p>
-              &copy; {new Date().getFullYear()} Libêncio Refrigeração. Todos os
+              © {new Date().getFullYear()} Libêncio Refrigeração. Todos os
               direitos reservados.
             </p>
             <div className="flex gap-4 items-center">

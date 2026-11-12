@@ -96,11 +96,15 @@ export default function ContactForm() {
               <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-bold text-slate-700 mb-2"
+                    >
                       Seu nome <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
+                      id="name"
                       name="name"
                       required
                       value={formState.name}
@@ -110,10 +114,10 @@ export default function ContactForm() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <span className="block text-sm font-bold text-slate-700 mb-2">
                       Tipo de atendimento{' '}
                       <span className="text-red-500">*</span>
-                    </label>
+                    </span>
                     <div className="flex gap-6 mt-3">
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -147,10 +151,14 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <label
+                      htmlFor="equipment"
+                      className="block text-sm font-bold text-slate-700 mb-2"
+                    >
                       Equipamento <span className="text-red-500">*</span>
                     </label>
                     <select
+                      id="equipment"
                       name="equipment"
                       required
                       value={formState.equipment}
@@ -175,11 +183,15 @@ export default function ContactForm() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <label
+                      htmlFor="service"
+                      className="block text-sm font-bold text-slate-700 mb-2"
+                    >
                       O que você precisa?{' '}
                       <span className="text-red-500">*</span>
                     </label>
                     <select
+                      id="service"
                       name="service"
                       required
                       value={formState.service}
@@ -205,11 +217,15 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                  <label
+                    htmlFor="description"
+                    className="block text-sm font-bold text-slate-700 mb-2"
+                  >
                     Descreva o problema ou sua necessidade{' '}
                     <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="description"
                     name="description"
                     required
                     rows={3}
@@ -222,7 +238,10 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <label
+                      htmlFor="neighborhood"
+                      className="block text-sm font-bold text-slate-700 mb-2"
+                    >
                       Bairro{' '}
                       <span className="text-slate-400 font-normal">
                         (Patos de Minas)
@@ -230,6 +249,7 @@ export default function ContactForm() {
                     </label>
                     <input
                       type="text"
+                      id="neighborhood"
                       name="neighborhood"
                       value={formState.neighborhood}
                       onChange={handleInputChange}
@@ -238,10 +258,14 @@ export default function ContactForm() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                    <label
+                      htmlFor="preferredTime"
+                      className="block text-sm font-bold text-slate-700 mb-2"
+                    >
                       Quando prefere o atendimento?
                     </label>
                     <select
+                      id="preferredTime"
                       name="preferredTime"
                       value={formState.preferredTime}
                       onChange={handleInputChange}
@@ -261,7 +285,7 @@ export default function ContactForm() {
 
                 <button
                   type="submit"
-                  className="button-primary mt-4 w-full rounded-xl py-4"
+                  className="button-primary mt-4 w-full rounded-xl py-4 flex items-center justify-center gap-2"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Mandar a OS no WhatsApp
