@@ -44,6 +44,13 @@ const localBusinessSchema = {
     "closes": "18:00"
   }
 };
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Libêncio Climatização e Refrigeração",
+  "url": "https://libencio-climatizacao.vercel.app/"
+};
 ---
 
 <!doctype html>
@@ -52,16 +59,17 @@ const localBusinessSchema = {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <meta name="generator" content={Astro.generator} />
-
     <meta name="google-site-verification" content="jMNGkroM22-b7kaaRrf0PjtCgbIHnXFz9XRJg46GXlU" />
-
     <link rel="canonical" href={canonicalURL} />
-
     <title>{title}</title>
 
     <meta property="og:type" content="website" />
+
+    <meta property="og:site_name" content="Libêncio Climatização e Refrigeração" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -74,6 +82,7 @@ const localBusinessSchema = {
     <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </head>
   <body>
     <slot />
