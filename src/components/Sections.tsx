@@ -127,7 +127,7 @@ export function Hero() {
           >
             <img
               src={slide.image}
-              alt={`Serviço de climatização e refrigeração em Patos de Minas - Slide ${index + 1}`}
+              alt={`Serviço de refrigeração e climatização em Patos de Minas - Slide ${index + 1}`}
               loading={index === 0 ? 'eager' : 'lazy'}
               className="w-full h-full object-cover object-center"
             />
@@ -242,7 +242,7 @@ export function Services() {
         <div className="reveal-on-scroll mb-12 max-w-2xl">
           <p className="eyebrow mb-3">Nossas soluções</p>
           <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-(--ink) sm:text-4xl">
-            Serviços de Climatização e Refrigeração
+            Serviços de Refrigeração e Climatizaçã
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-slate-500">
             Oferecemos soluções completas separadas por vias especializadas para
