@@ -14,6 +14,7 @@ import {
   Star,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useGoogleRating } from '../hooks/useGoogleRating';
 
 function useScrollReveal() {
   useEffect(() => {
@@ -47,9 +48,11 @@ function useScrollReveal() {
 }
 
 export function Hero() {
+  const { formattedRating, count } = useGoogleRating();
+
   const heroSlides = [
     {
-      badge: '5,0 no Google · 35 avaliações',
+      badge: `${formattedRating} no Google · ${count} ${count === 1 ? 'avaliação' : 'avaliações'}`,
       highlightedTitle: 'parado?',
       titlePrefix: 'Geladeira com defeito ou ar-condicionado ',
       description:
@@ -889,6 +892,7 @@ export function HowItWorks() {
 export function Reviews() {
   useScrollReveal();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { formattedRating, count } = useGoogleRating();
 
   const reviews = [
     {
@@ -939,7 +943,9 @@ export function Reviews() {
               Avaliações no Google
             </h2>
             <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-              <span className="text-3xl font-black text-(--ink)">5,0</span>
+              <span className="text-3xl font-black text-(--ink)">
+                {formattedRating}
+              </span>
               <div className="flex text-amber-400 gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
@@ -947,7 +953,8 @@ export function Reviews() {
               </div>
             </div>
             <p className="text-slate-500 text-sm">
-              baseado em 35 avaliações reais
+              baseado em {count}{' '}
+              {count === 1 ? 'avaliação real' : 'avaliações reais'}
             </p>
           </div>
           <div className="hidden md:flex items-center gap-3">
